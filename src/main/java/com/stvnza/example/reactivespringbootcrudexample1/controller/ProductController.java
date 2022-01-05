@@ -28,4 +28,19 @@ public class ProductController {
     public Flux<ProductDto> productInRange(@RequestParam("min") double min,@RequestParam("max") double max){
         return productService.getProductInRange(min,max);
     }
+
+    @PostMapping
+    public Mono<ProductDto> saveProduct(Mono<ProductDto> product){
+        return productService.saveProduct(product);
+    }
+
+    @PutMapping("/update/{id}")
+    public Mono<ProductDto> updateProduct(@PathVariable("id") String id,Mono<ProductDto> product){
+        return productService.updateProduct(product,id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Mono<Void> deleteProduct(@PathVariable("id") String id){
+        return productService.deleteProduct(id);
+    }
 }
